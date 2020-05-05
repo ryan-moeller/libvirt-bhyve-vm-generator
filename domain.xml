@@ -1,0 +1,79 @@
+
+<domain type="bhyve">
+  <name>
+    r353709
+  </name>
+  <memory unit="GiB">
+    8
+  </memory>
+  <vcpu>
+    4
+  </vcpu>
+  <os>
+    <type>
+      hvm
+    </type>
+    <loader readonly="yes" type="pflash">
+      /usr/local/share/uefi-firmware/BHYVE_UEFI_CODE-devel.fd
+    </loader>
+    <boot dev="hd">
+    </boot>
+  </os>
+  <features>
+    <acpi>
+    </acpi>
+    <apic>
+    </apic>
+  </features>
+  <clock offset="utc">
+  </clock>
+  <on_poweroff>
+    destroy
+  </on_poweroff>
+  <on_reboot>
+    restart
+  </on_reboot>
+  <on_crash>
+    destroy
+  </on_crash>
+  <devices>
+    <controller type="pci" index="0" model="pci-root">
+    </controller>
+    <interface type="bridge">
+      <source bridge="bridge0">
+      </source>
+      <model type="virtio">
+      </model>
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x03" function="0x0">
+      </address>
+    </interface>
+    <serial type="nmdm">
+      <source master="/dev/nmdm3A" slave="/dev/nmdm3B">
+      </source>
+      <target port="0">
+      </target>
+    </serial>
+    <console type="nmdm">
+      <source master="/dev/nmdm3A" slave="/dev/nmdm3B">
+      </source>
+      <target type="serial" port="0">
+      </target>
+    </console>
+    <hostdev mode="subsystem" type="scsi_ctl" model="virtio">
+      <source protocol="ioctl" pp="5" vp="0">
+      </source>
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x02" function="0x0">
+      </address>
+    </hostdev>
+    <hostdev mode="subsystem" type="pci">
+      <driver name="vmm">
+      </driver>
+      <source>
+        <address domain="0x0000" bus="0x05" slot="0x00" function="0x8">
+        </address>
+      </source>
+      <address type="pci" domain="0x0000" bus="0x00" slot="0x05" function="0x0">
+      </address>
+    </hostdev>
+  </devices>
+</domain>
