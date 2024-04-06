@@ -2,14 +2,14 @@
 (require "private/vm-utils.rkt"
          "private/libvirt-domxml.rkt")
 
-(define iso "TrueNAS/TrueNAS-12.0-U8.1.iso")
+(define iso "TrueNAS/TrueNAS-SCALE-22.12-MASTER-20220712-132906.iso")
 
-(vm "TrueNAS-12_0-U8_1")
+(vm "TrueNAS-SCALE-22.12-MASTER-20220712-132906")
 (generate-domxml
  `(domain
    ([type "bhyve"])
    (name ,(vm))
-   ,(memory 4 'GiB)
+   ,(memory 8 'GiB)
    ,(cpus 2)
    (os
     (type ([arch "x86_64"]) "hvm")
@@ -17,8 +17,8 @@
     (boot ([dev "cdrom"])))
    (features (acpi) (apic))
    (devices
-    ,(disk (zvol "disk0" 20 'GB) "hda")
-    ,(disk (zvol "disk1" 20 'GB) "hdb")
+    ,(virtio-disk (zvol "disk0" 20 'GB) "hda")
+    ,(virtio-disk (zvol "disk1" 40 'GB) "hdb")
     ,(cdrom (installer iso) "hdc")
     ,(virtio-bridge "bridge0")
     ,@(nmdm-console (auto-nmdm)))))

@@ -2,9 +2,9 @@
 (require "private/vm-utils.rkt"
          "private/libvirt-domxml.rkt")
 
-(define iso "TrueNAS/TrueNAS-12.0-U8.1.iso")
+(define iso "FreeBSD/FreeBSD-13.1-RELEASE-amd64-bootonly.iso")
 
-(vm "TrueNAS-12_0-U8_1")
+(vm "FreeBSD-13.1-RELEASE")
 (generate-domxml
  `(domain
    ([type "bhyve"])
@@ -18,7 +18,6 @@
    (features (acpi) (apic))
    (devices
     ,(disk (zvol "disk0" 20 'GB) "hda")
-    ,(disk (zvol "disk1" 20 'GB) "hdb")
     ,(cdrom (installer iso) "hdc")
     ,(virtio-bridge "bridge0")
     ,@(nmdm-console (auto-nmdm)))))
