@@ -10,6 +10,7 @@
          nmdm-console
          pci-addr
          virtio-bridge
+         virtio-disk
          cdrom
          disk
          scsi-ctl
@@ -68,6 +69,12 @@
          (driver ([name "file"] [type "raw"]))
          (source ([file ,file]))
          (target ([dev ,dev] [bus "sata"]))))
+
+(define (virtio-disk file dev)
+  `(disk ([type "file"] [device "disk"])
+         (driver ([name "file"] [type "raw"]))
+         (source ([file ,file]))
+         (target ([dev ,dev] [bus "virtio"]))))
 
 (define (scsi-ctl ctldev addr)
   (match-let ([`(,proto ,pp ,vp) (string-split ctldev "/")])
