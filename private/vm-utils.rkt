@@ -36,7 +36,7 @@
                               (match used
                                 ['() n]
                                 [`(,u . ,_) #:when (< n u) n]
-                                [`(_ . ,rest-used)
+                                [`(,_ . ,rest-used)
                                  (next-avail (stream-rest nats) rest-used)])))])
        (next-avail (in-naturals) used))]
     ['err (error 'next-nmdm "could not find nmdm")]))
