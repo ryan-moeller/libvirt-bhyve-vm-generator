@@ -19,8 +19,7 @@
          cpus
          loader
          uefi
-         uefi-csm
-         uefi-devel)
+         uefi-csm)
 
 (define (~x v)
   (format "0x~x" v))
@@ -108,4 +107,3 @@
 
 (define uefi (uefi-firmware-path "BHYVE_UEFI"))
 (define uefi-csm (uefi-firmware-path "BHYVE_UEFI_CSM"))
-(define uefi-devel (uefi-firmware-path "BHYVE_UEFI_CODE-devel"))
