@@ -3,8 +3,13 @@
          xml
          xml/xexpr
          "zfs.rkt")
-(provide generate-domxml installer zvol auto-nmdm
-         vm bhyve-dataset installer-dataset)
+(provide generate-domxml
+         installer
+         zvol
+         auto-nmdm
+         vm
+         bhyve-dataset
+         installer-dataset)
 
 (define vm (make-parameter #f))
 
